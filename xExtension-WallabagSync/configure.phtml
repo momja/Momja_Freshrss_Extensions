@@ -9,7 +9,7 @@ $username = (string)($conf['username'] ?? '');
 $has_password = !empty($conf['password']);
 ?>
 <form method="post">
-	<input type="hidden" name="token" value="<?= FreshRSS_Context::$user_conf->token ?>">
+	<input type="hidden" name="_csrf" value="<?= FreshRSS_Auth::csrfToken() ?>">
 	<div class="form-group">
 		<label class="group-name" for="wallabag_url">Wallabag base URL</label>
 		<div class="group-controls">
