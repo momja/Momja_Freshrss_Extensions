@@ -1,0 +1,8 @@
+{
+	"name": "Wallabag Sync",
+	"author": "Max Omdal",
+	"description": "Syncs read state from FreshRSS to Wallabag. When an entry from a Wallabag Atom feed is marked read in FreshRSS, the corresponding entry is archived in Wallabag via its API.",
+	"version": "0.1.0",
+	"entrypoint": "WallabagSync",
+	"type": "user"
+}

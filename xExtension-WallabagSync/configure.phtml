@@ -1,0 +1,62 @@
+<?php
+/** @var WallabagSyncExtension $this */
+$conf = $this->getUserConfiguration();
+$conf = is_array($conf) ? $conf : [];
+$wallabag_url = (string)($conf['wallabag_url'] ?? '');
+$client_id = (string)($conf['client_id'] ?? '');
+$client_secret = (string)($conf['client_secret'] ?? '');
+$username = (string)($conf['username'] ?? '');
+$has_password = !empty($conf['password']);
+?>
+<form method="post">
+	<div class="form-group">
+		<label class="group-name" for="wallabag_url">Wallabag base URL</label>
+		<div class="group-controls">
+			<input type="url" id="wallabag_url" name="wallabag_url"
+				value="<?= htmlspecialchars($wallabag_url, ENT_QUOTES) ?>"
+				placeholder="https://wallabag.example.com" required />
+			<p class="help">No trailing slash. This is also the prefix used to identify Wallabag entries in feeds.</p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="client_id">Client ID</label>
+		<div class="group-controls">
+			<input type="text" id="client_id" name="client_id"
+				value="<?= htmlspecialchars($client_id, ENT_QUOTES) ?>" autocomplete="off" required />
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="client_secret">Client secret</label>
+		<div class="group-controls">
+			<input type="text" id="client_secret" name="client_secret"
+				value="<?= htmlspecialchars($client_secret, ENT_QUOTES) ?>" autocomplete="off" required />
+			<p class="help">Create an API client in Wallabag: Settings → API clients management → Create a new client.</p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="username">Wallabag username</label>
+		<div class="group-controls">
+			<input type="text" id="username" name="username"
+				value="<?= htmlspecialchars($username, ENT_QUOTES) ?>" autocomplete="off" required />
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="password">Wallabag password</label>
+		<div class="group-controls">
+			<input type="password" id="password" name="password" autocomplete="new-password"
+				placeholder="<?= $has_password ? '(unchanged — leave blank to keep)' : '' ?>"
+				<?= $has_password ? '' : 'required' ?> />
+			<p class="help">Stored locally in your FreshRSS user config. Used once to obtain an OAuth token, which is then cached and refreshed automatically.</p>
+		</div>
+	</div>
+
+	<div class="form-group form-actions">
+		<div class="group-controls">
+			<button type="submit" class="btn btn-important">Save</button>
+		</div>
+	</div>
+</form>
