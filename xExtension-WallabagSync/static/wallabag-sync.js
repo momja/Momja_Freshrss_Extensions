@@ -65,13 +65,14 @@
 	}
 
 	function entryLinkHref(fluxEl) {
-		// FreshRSS renders the canonical entry link with class .item.link or as
-		// the anchor inside .title; check the most common shapes.
+		// The first `a.item-element` in a .flux is the read-toggle action link
+		// (/i/?c=entry&a=read&...), not the article URL. Target the title
+		// anchor specifically across the feed-list and reader views.
 		const candidates = [
-			fluxEl.querySelector('a.item-element[href]'),
-			fluxEl.querySelector('h1.title a[href]'),
-			fluxEl.querySelector('a.link[href]'),
-			fluxEl.querySelector('.link > a[href]'),
+			fluxEl.querySelector('a.item-element.title[href]'),    // feed list view
+			fluxEl.querySelector('h1.title a.go_website[href]'),   // article/reader view
+			fluxEl.querySelector('a.go_website[href]'),
+			fluxEl.querySelector('li.item.link a[href]'),
 		];
 		for (const a of candidates) {
 			if (a && a.href) {
